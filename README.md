@@ -1,6 +1,6 @@
 # tvaroska.github.io
 
-Source for [https://tvaroska.github.io](https://tvaroska.github.io): one-screen plain directory covering production Enterprise AI reference architectures, *No Demo Survives Production* writing and research, embedded OTA firmware ([`fleetforge`](https://github.com/tvaroska/fleetforge)), nonprofit robotics ([`FRC-Flux-Robotics`](https://github.com/FRC-Flux-Robotics)), and personal-capacity advisory scope.
+Source for [https://tvaroska.github.io](https://tvaroska.github.io): one-screen plain directory covering production Enterprise AI reference architectures, *No Demo Survives Production* writing and research, embedded OTA firmware ([`fleetforge`](https://github.com/tvaroska/fleetforge)), and nonprofit robotics ([`FRC-Flux-Robotics`](https://github.com/FRC-Flux-Robotics)).
 
 ## Architecture
 

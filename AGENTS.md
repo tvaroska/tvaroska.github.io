@@ -4,7 +4,7 @@ Personal technical and executive homepage served at `https://tvaroska.github.io`
 
 ## 1. Repository Map
 
-- [`index.html`](index.html) — One-screen plain directory (`<= 260` words, zero JavaScript, zero scroll on a `1440x900` laptop viewport) covering writing, research, open-source Enterprise AI platforms, embedded firmware (`fleetforge`), FLUX Robotics (`FRC Team 10413`), and personal-capacity advisory scope.
+- [`index.html`](index.html) — One-screen plain directory (`<= 260` words, zero JavaScript, zero scroll on a `1440x900` laptop viewport) covering writing, research, open-source Enterprise AI platforms, embedded firmware (`fleetforge`), and FLUX Robotics (`FRC Team 10413`).
 - [`styles.css`](styles.css) — Minimal semantic token stylesheet (`< 160` lines, `:root` light + `prefers-color-scheme: dark`, `tabular-nums`, unbordered two-column directory rows).
 - [`favicon.svg`](favicon.svg) & [`og-card.svg`](og-card.svg) / [`og-card.png`](og-card.png) — High-contrast tab monogram icon and `1200x630` OpenGraph preview image.
 - [`.stitch/DESIGN.md`](.stitch/DESIGN.md) — Locked visual identity, semantic tokens, and negative design constraints.
