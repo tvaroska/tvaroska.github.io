@@ -2,54 +2,39 @@
 
 ## 1. Identity & Category
 
-- **Surface:** Personal technical & executive homepage (`https://tvaroska.github.io`)
-- **Aesthetic Direction:** **Swiss Technical Monograph** (crisp typographic index grid, architectural hairline borders, empirical receipt strips, zero marketing fluff)
-- **Stack:** Pure static HTML5 + semantic CSS custom properties (`index.html`, `styles.css`, `favicon.svg`, `og-card.png`, `.nojekyll`) with zero JavaScript frameworks, zero npm dependencies, and zero GitHub Actions workflows.
+- **Surface:** Personal directory (`https://tvaroska.github.io`)
+- **Aesthetic Direction:** **One-Screen Plain Directory** (*Mitchell Hashimoto / Russ Cox restraint*: single `660px` column, `~225` words total, zero vertical scroll on a `1440x900` laptop viewport, zero cards, zero JavaScript).
+- **Stack:** Pure static HTML5 + ~95 lines of CSS (`index.html`, `styles.css`, `favicon.svg`, `og-card.png`, `.nojekyll`).
 
 ## 2. Semantic Color Tokens (`:root` Light + `prefers-color-scheme: dark`)
 
-### Light Mode (Default — Architectural Paper & Carbon Ink)
-- `--surface`: `#f8f9fa`
-- `--surface-container`: `#ffffff`
-- `--surface-container-low`: `#f1f3f4`
-- `--on-surface`: `#14171a`
-- `--on-surface-variant`: `#4b525a`
-- `--on-surface-muted`: `#69717a`
-- `--outline`: `#14171a`
-- `--outline-variant`: `#dadce0`
-- `--primary`: `#1a73e8`
-- `--primary-subtle`: `#e8f0fe`
-- `--status-ok-fg`: `#137333`
-- `--status-ok-bg`: `#e6f4ea`
+### Light Mode
+- `--surface`: `#fcfcfb`
+- `--surface-container`: `#f4f4f2`
+- `--on-surface`: `#141413`
+- `--on-surface-variant`: `#4a4a46`
+- `--on-surface-muted`: `#73736d`
+- `--outline-variant`: `#e2e2dd`
+- `--primary`: `#0b57d0`
 
-### Dark Mode (`@media (prefers-color-scheme: dark)` / `[data-theme="dark"]` — Carbon Slate, Zero Purple)
-- `--surface`: `#0d1117`
-- `--surface-container`: `#151b23`
-- `--surface-container-low`: `#1c232d`
-- `--on-surface`: `#e6edf3`
-- `--on-surface-variant`: `#9ca3af`
-- `--on-surface-muted`: `#7d8590`
-- `--outline`: `#e6edf3`
-- `--outline-variant`: `#2a323d`
-- `--primary`: `#58a6ff`
-- `--primary-subtle`: `#16263b`
-- `--status-ok-fg`: `#3fb950`
-- `--status-ok-bg`: `#12261e`
+### Dark Mode (`@media (prefers-color-scheme: dark)`)
+- `--surface`: `#111214`
+- `--surface-container`: `#1a1c1f`
+- `--on-surface`: `#e6e6e3`
+- `--on-surface-variant`: `#a3a39e`
+- `--on-surface-muted`: `#787873`
+- `--outline-variant`: `#26292e`
+- `--primary`: `#6cb6ff`
 
 ## 3. Typography & Layout Rules
 
-- **Sans Stack:** `"Google Sans", "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`
-- **Mono Stack:** `"JetBrains Mono Variable", "JetBrains Mono", "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace`
-- **Numeric Discipline:** Apply `font-variant-numeric: tabular-nums` on all section numbers (`01`..`05`), metric strips, dates, and ledger rows.
-- **Grid:** `1040px` max-width container with `1.5px solid var(--outline)` masthead rule and asymmetric `220px` index rail + `1fr` content column (`<= 820px` collapses cleanly to a single column).
-- **Motion & Favicon:** Respect `@media (prefers-reduced-motion: reduce)` and ship high-contrast `favicon.svg` + `1200x630` `og-card.png`.
+- **Sans Stack:** `-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif`
+- **Mono Stack:** `"JetBrains Mono", "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace`
+- **Single-Viewport Budget:** `<= 260` visible words, `max-width: 660px`, unbordered `175px 1fr` directory rows with `tabular-nums`, fitting completely inside `1440x900` without scrolling.
 
 ## 4. Do Not Generate (Hard Negative Constraints)
 
-- No SaaS hero biscuit pills or pulsing status dots above `<h1>`.
-- No CSS gradient text fills on headlines or keywords.
-- No purple or violet accents in dark mode.
-- No decorative left-edge or top-edge colored accent bars on cards.
-- No icon-stuffed bento boxes or icon-in-circle KPI headers.
-- No SVG noise/grain overlays (`feTurbulence`) or grid-line backgrounds.
-- No Unicode em-dashes, arrow tokens (`->`), or corporate AI buzzwords (*delve, leverage, utilize, orchestrate, paradigm, synergy, ecosystem, landscape, seamless, holistic, pivotal, crucial*).
+- Zero bordered cards, boxes, KPI stat strips, pill buttons, status badges, or SVG social icons.
+- Zero `01 / SECTION` uppercase eyebrows, top coordinate bars, navigation bars, or theme-switcher buttons.
+- Zero multi-column SaaS feature grids, gradient text, or purple dark-mode accents.
+- Zero Unicode em-dashes, arrow tokens (`->`), raw Markdown backticks, or AI buzzwords.

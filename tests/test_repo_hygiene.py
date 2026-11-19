@@ -1,4 +1,4 @@
-"""Repository hygiene, air-gap, anti-slop, and HTML/SVG asset tests for tvaroska.github.io."""
+"""Repository hygiene, air-gap, anti-slop, and one-screen restraint tests for tvaroska.github.io."""
 
 from __future__ import annotations
 
@@ -35,8 +35,11 @@ class _PageInspector(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.h1_count = 0
+        self.script_count = 0
         self.title_text = ""
+        self.body_chunks: list[str] = []
         self._in_title = False
+        self._in_body = False
         self.links: list[str] = []
         self.ids: set[str] = set()
         self.meta_names: set[str] = set()
@@ -49,6 +52,10 @@ class _PageInspector(HTMLParser):
             self.ids.add(attr_map["id"])
         if tag == "h1":
             self.h1_count += 1
+        elif tag == "body":
+            self._in_body = True
+        elif tag == "script":
+            self.script_count += 1
         elif tag == "title":
             self._in_title = True
         elif tag == "a" and "href" in attr_map:
@@ -69,10 +76,14 @@ class _PageInspector(HTMLParser):
     def handle_endtag(self, tag: str) -> None:
         if tag == "title":
             self._in_title = False
+        elif tag == "body":
+            self._in_body = False
 
     def handle_data(self, data: str) -> None:
         if self._in_title:
             self.title_text += data
+        elif self._in_body:
+            self.body_chunks.append(data)
 
 
 def _iter_repo_text_files() -> list[Path]:
@@ -119,7 +130,7 @@ class RepoHygieneTests(unittest.TestCase):
                     f"{label} leak in {path.relative_to(REPO_ROOT)}: {match.group(0) if match else ''}",
                 )
 
-    def test_index_html_structure_links_and_anti_slop(self) -> None:
+    def test_index_html_one_screen_restraint_and_anti_slop(self) -> None:
         html_text = (REPO_ROOT / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("\u2014", html_text, "Unicode em-dash prohibited on public surface")
         self.assertNotIn("->", html_text, "ASCII arrow token prohibited on public surface")
@@ -132,12 +143,20 @@ class RepoHygieneTests(unittest.TestCase):
         inspector = _PageInspector()
         inspector.feed(html_text)
         self.assertEqual(inspector.h1_count, 1, "Page must contain exactly one <h1>")
+        self.assertEqual(inspector.script_count, 0, "Zero JavaScript needed on one-screen directory")
         self.assertIn("Boris Tvaroska", inspector.title_text)
         self.assertNotIn("&", inspector.title_text)
         self.assertTrue(inspector.has_favicon, "High-contrast favicon link required")
         self.assertIn("description", inspector.meta_names)
         for og in ("og:title", "og:description", "og:image", "og:url"):
             self.assertIn(og, inspector.meta_props)
+
+        visible_words = " ".join(inspector.body_chunks).split()
+        self.assertLessEqual(
+            len(visible_words),
+            260,
+            f"One-screen directory exceeded 260-word budget ({len(visible_words)} words)",
+        )
 
         for href in inspector.links:
             if href.startswith("#"):
@@ -152,8 +171,9 @@ class RepoHygieneTests(unittest.TestCase):
         for xml_name in ("favicon.svg", "og-card.svg", "sitemap.xml"):
             ET.parse(REPO_ROOT / xml_name)
 
-    def test_css_semantic_tokens_and_calm_ux_rules(self) -> None:
+    def test_css_minimalism_and_calm_ux_rules(self) -> None:
         css = (REPO_ROOT / "styles.css").read_text(encoding="utf-8")
+        self.assertLessEqual(len(css.splitlines()), 160, "Keep CSS compact (<160 lines) to prevent component bloat")
         for required_token in (
             "--surface:",
             "--surface-container:",
